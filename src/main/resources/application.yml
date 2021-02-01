@@ -1,0 +1,10 @@
+spring:
+##-----数据库连接配置--------------------------------------------------
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:1521:cym
+    username: pmis
+    password: pmis
+    driver-class-name: oracle.jdbc.OracleDriver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
