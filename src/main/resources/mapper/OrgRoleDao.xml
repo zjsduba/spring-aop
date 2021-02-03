@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springaop.tx.dao.OrgRoleDao">
+
+    <resultMap type="com.example.springaop.tx.entity.OrgRole" id="OrgRoleMap">
+        <result property="id_" column="id_" jdbcType="VARCHAR"/>
+        <result property="name_" column="name_" jdbcType="VARCHAR"/>
+        <result property="alias_" column="alias_" jdbcType="VARCHAR"/>
+        <result property="enabled_" column="enabled_" jdbcType="INTEGER"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="createTime_" column="create_time_" jdbcType="TIMESTAMP"/>
+        <result property="createBy_" column="create_by_" jdbcType="VARCHAR"/>
+        <result property="updateTime_" column="update_time_" jdbcType="TIMESTAMP"/>
+        <result property="updateBy_" column="update_by_" jdbcType="VARCHAR"/>
+        <result property="typeId_" column="type_id_" jdbcType="VARCHAR"/>
+        <result property="typeName_" column="type_name_" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrgRoleMap">
+        select
+          id_, name_, alias_, enabled_, description, create_time_, create_by_, update_time_, update_by_, type_id_, type_name_
+        from cym.org_role
+        where id_ = #{id_}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrgRoleMap">
+        select
+          id_, name_, alias_, enabled_, description, create_time_, create_by_, update_time_, update_by_, type_id_, type_name_
+        from cym.org_role
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OrgRoleMap">
+        select
+          id_, name_, alias_, enabled_, description, create_time_, create_by_, update_time_, update_by_, type_id_, type_name_
+        from cym.org_role
+        <where>
+            <if test="id_ != null and id_ != ''">
+                and id_ = #{id_}
+            </if>
+            <if test="name_ != null and name_ != ''">
+                and name_ = #{name_}
+            </if>
+            <if test="alias_ != null and alias_ != ''">
+                and alias_ = #{alias_}
+            </if>
+            <if test="enabled_ != null">
+                and enabled_ = #{enabled_}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="createTime_ != null">
+                and create_time_ = #{createTime_}
+            </if>
+            <if test="createBy_ != null and createBy_ != ''">
+                and create_by_ = #{createBy_}
+            </if>
+            <if test="updateTime_ != null">
+                and update_time_ = #{updateTime_}
+            </if>
+            <if test="updateBy_ != null and updateBy_ != ''">
+                and update_by_ = #{updateBy_}
+            </if>
+            <if test="typeId_ != null and typeId_ != ''">
+                and type_id_ = #{typeId_}
+            </if>
+            <if test="typeName_ != null and typeName_ != ''">
+                and type_name_ = #{typeName_}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id_" useGeneratedKeys="true">
+        insert into org_role(name_, alias_, enabled_, description, create_time_, create_by_, update_time_, update_by_, type_id_, type_name_)
+        values (#{name_}, #{alias_}, #{enabled_}, #{description}, #{createTime_}, #{createBy_}, #{updateTime_}, #{updateBy_}, #{typeId_}, #{typeName_})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cym.org_role
+        <set>
+            <if test="name_ != null and name_ != ''">
+                name_ = #{name_},
+            </if>
+            <if test="alias_ != null and alias_ != ''">
+                alias_ = #{alias_},
+            </if>
+            <if test="enabled_ != null">
+                enabled_ = #{enabled_},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="createTime_ != null">
+                create_time_ = #{createTime_},
+            </if>
+            <if test="createBy_ != null and createBy_ != ''">
+                create_by_ = #{createBy_},
+            </if>
+            <if test="updateTime_ != null">
+                update_time_ = #{updateTime_},
+            </if>
+            <if test="updateBy_ != null and updateBy_ != ''">
+                update_by_ = #{updateBy_},
+            </if>
+            <if test="typeId_ != null and typeId_ != ''">
+                type_id_ = #{typeId_},
+            </if>
+            <if test="typeName_ != null and typeName_ != ''">
+                type_name_ = #{typeName_},
+            </if>
+        </set>
+        where id_ = #{id_}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cym.org_role where id_ = #{id_}
+    </delete>
+
+</mapper>

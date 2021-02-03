@@ -1,10 +1,10 @@
 spring:
 ##-----数据库连接配置--------------------------------------------------
   datasource:
-    url: jdbc:oracle:thin:@127.0.0.1:1521:cym
-    username: pmis
-    password: pmis
-    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:mysql://localhost:3306/cym?useSSL=false&allowMultiQueries=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: zjsduba
+    driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
