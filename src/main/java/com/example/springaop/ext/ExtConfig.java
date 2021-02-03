@@ -22,7 +22,16 @@ import org.springframework.context.annotation.Configuration;
  *      BeanDefinitionRegistry:bean定义信息的保存中心，以后BeanFactory就是按照BeanDefinitionRegistry里面保存的每一个bean定义信息创建bean实例
  * {@link org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor}
  *      postProcessorBeanDefinitionRegistry(BeanDefinitionRegistry registry)
- *      在所有bean定义信息将要被加载，bean实例还未创建
+ *      在所有bean定义信息将要被加载，bean实例还未创建时执行
+ *      优先于BeanFactoryPostProcessor执行：
+ *      利用BeanDefinitionRegistryPostProcessor给容器中在额外添加一些组件
+ *      原理：
+ *          1.IOC创建对象
+ *          2.refresh()->invokeBeanFactoryPostProcessors(beanFactory)
+ *          3.从容器中获取到所有的BeanFactoryPostProcessor组件
+ *              1.依次触发所有的postProcessBeanDefinitionRegistry()方法
+ *              2.在来触发postProcessBeanFactory()方法
+ *          4.在从容器中找到BeanFactoryPostProcessor组件，依次触发postProcessBeanFactory()方法
  *
  * @date 2021/2/3 9:07
  * @version 1.0
