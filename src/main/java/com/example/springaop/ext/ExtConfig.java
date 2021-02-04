@@ -32,6 +32,15 @@ import org.springframework.context.annotation.Configuration;
  *              1.依次触发所有的postProcessBeanDefinitionRegistry()方法
  *              2.在来触发postProcessBeanFactory()方法
  *          4.在从容器中找到BeanFactoryPostProcessor组件，依次触发postProcessBeanFactory()方法
+ * 3.ApplicationListener：监听容器中发布的事件，事件模型驱动开发
+ *  public interface ApplicationListener<E extends ApplicationEvent> extends EventListener
+ *      监听ApplicationEvent及其下面的子事件
+ *      1.实现一个监听器来监听某个时间（ApplicationEvent及其子类）
+ *      2.把监听器加入容器
+ *      3.只要容器中有相关事件发布，我们就能监听到这个事件（ContextRefreshedEvent：容器刷新完成-所有bean都完全创建会发布这个事件）
+ *      4.自定义发布事件
+ *          ApplicationContext.publishEvent(Object object)
+ *      原理：
  *
  * @date 2021/2/3 9:07
  * @version 1.0

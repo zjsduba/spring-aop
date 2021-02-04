@@ -18,7 +18,7 @@ class MyBeanFactoryPostProcessorTest {
     @Test
     void postProcessBeanFactory() {
         AnnotationConfigApplicationContext annotationConfigApplicationContext=new AnnotationConfigApplicationContext(ExtConfig.class);
-
+        annotationConfigApplicationContext.publishEvent("发布事件");
         MyBeanFactoryPostProcessor bean = annotationConfigApplicationContext.getBean(MyBeanFactoryPostProcessor.class);
     }
 }
