@@ -144,3 +144,25 @@ BeanFactoryPostProcessors:beanFactory的后置处理器,在beanFactory标准初�
         SmartInitializationSingleton.afterSingletonsInstantiated();
 12.finishRefresh():完成BeanFactory的初始化创建工作，IOC容器就创建完成
     1.清除上下文级别的资源缓存（例如来自扫描的ASM元数据）
+    2.initLifecycleProcessor():初始化生命周期有关的后置处理器:LifecycleProcessor
+        可以实现LifecycleProcessor，会在BeanFactory进行到特定生命周期时调用
+        默认从容器中找是否有名为lifecycleProcessor的组件，没有就new DefaultLifecycleProcessor()加入到容器中
+    3.回调LifecycleProcessor的onRefresh()方法；拿到前面所有定义的生命周期处理器回调onRefresh()方法
+    4.publishEvent(new ContextRefreshedEvent(this)):发布容器刷新完成事件
+    5.LiveBeansView.registerApplicationContext(this):
+ =====总结=====
+1.Spring在启动的时候，会保存所有注册进来的bean的定义信息:BeanDefinition
+    1.xml注册bean；
+    2.使用注解方式注册：@Component,@Service,@Bean等
+2.Spring容器会在合适的时机创建这些bean
+    1.用到这个bean的时候创建：利用getBean()方法，创建好以后保存在容器中
+    2.统一创建剩下所有bean的时候:finishBeanFactoryInitialization();
+3.后置处理器:BeanPostProcessor
+    1.每一个bean创建完成后，都会使用各种后置处理器进行处理，来增强bean的功能
+        AutowiredAnnotationBeanPostProcessor来处理自动注入功能
+    2.AnnotationAwareAspectJAutoProxyCreator来做AOP功能
+    xxx
+4.事件驱动模型:
+    ApplicationListener:事件监听
+    ApplicationEventMulticaster:事件派发器
+    
